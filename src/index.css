@@ -1,0 +1,498 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  html {
+    @apply font-sans;
+  }
+
+
+
+  @font-face {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap')
+  }
+}
+
+@layer components {
+  .cc0-content {
+    @apply min-h-screen
+  }
+
+  .cc0-button {
+    @apply bg-red-500 text-white font-medium px-2 py-1 rounded m-2 hover:bg-red-700
+  }
+
+  .form-list {
+    @apply max-w-sm mx-auto
+  }
+
+  .cc0-list {
+    @apply block mb-2 text-sm font-medium text-gray-900 
+  }
+
+  .cc0-select {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+  }
+
+  .cc0-select-invalid {
+    @apply bg-gray-50 border border-red-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+  }
+
+  .cc0-input-form {
+    @apply bg-white shadow-md rounded p-10
+  }
+
+  .cc0-input-label {
+    @apply block mb-2 text-sm font-medium text-gray-900 
+  }
+
+  .cc0-input-text {
+    @apply m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+    /* disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+      invalid:border-pink-500 invalid:text-pink-600
+      focus:invalid:border-pink-500 focus:invalid:ring-pink-500 */
+  }
+
+ .cc0-input-invalid {
+    @apply m-4 border bg-gray-50 border-red-500 text-sm rounded-lg block p-2.5
+  }
+
+  .cc0-input-email {
+    @apply m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+    /* disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+      invalid:border-pink-500 invalid:text-pink-600
+      focus:invalid:border-pink-500 focus:invalid:ring-pink-500 */
+  }
+
+  .cc0-input-email:valid {
+    @apply bg-green-100 border border-green-500 text-green-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+  }
+
+  .cc0-input-valid {
+    @apply m-4 bg-green-100 border border-green-500 text-green-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+  }
+
+  .cc0-signup {
+    @apply flex flex-row w-6/12 m-auto justify-center
+  }
+
+  .cc0-signin {
+    @apply flex flex-row w-6/12 m-auto justify-center
+  }
+
+  .cc0-search {
+    @apply w-max p-2 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500
+  }
+
+  /* Navigation */
+
+  .navbar {
+    @apply flex flex-nowrap row-auto justify-around p-4
+  }
+
+  /* Home */
+
+  .home {
+    @apply w-full h-full
+  }
+
+  .home-hero {
+    @apply justify-around w-5/6 h-2/4 m-auto p-32 shadow-xl rounded-3xl bg-cover bg-opacity-0 overflow-hidden
+  }
+
+  .hero-text {
+    @apply font-black text-8xl text-center text-wrap
+  }
+
+  .hero-text-container {
+    @apply mb-10
+  }
+
+  .hero-text::first-letter {
+    @apply text-red-500
+  }
+
+  .dataset-attributes {
+    @apply flex flex-col w-max m-auto font-semibold list-disc text-left mt-3 mb-3
+  }
+
+
+  /* Audio player */
+  .cc0-audio-player {
+    @apply w-full m-2
+  }
+
+  .cc0-waveform {
+    @apply flex-grow
+  }
+
+
+  .cc0-audio-player-main {
+    @apply flex flex-col justify-between
+  }
+
+.cc0-play-button {
+  @apply p-3 rounded-full bg-gray-100 shadow-sm mr-4 hover:bg-gray-300
+}
+
+.cc0-volume-button {
+  @apply p-3 rounded-full bg-gray-100 shadow-sm hover:bg-gray-300
+}
+
+.cc0-audio-controls {
+  @apply flex flex-row mt-5 justify-between items-center
+}
+
+.cco-play-pause {
+  @apply flex flex-row items-center
+}
+
+.cc0-volume-slider {
+  @apply flex self-center origin-left items-center
+}
+
+#volume {
+  @apply self-center
+}
+
+.cc0-converter {
+  @apply self-center
+}
+
+/*Range slider*/
+input[type=range] {
+  @apply appearance-none bg-transparent
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  @apply  bg-black/25 rounded-full;
+}
+
+input[type=range]::-moz-range-track {
+  @apply bg-black/25 rounded-full;
+}
+
+input[type=range]::-ms-track {
+  @apply bg-black/25 rounded-full;
+}
+
+  /* List of sounds*/
+
+  .cc0-pagination-button {
+    @apply bg-gray-500 text-white font-medium px-2 py-1 rounded m-2 hover:bg-red-500 h-full
+  }
+
+  .cc0-pagination-button-selected {
+    @apply bg-red-500 text-white font-medium px-2 py-1 rounded m-2 hover:bg-red-500 h-full
+  }
+
+  .cc0-sound-title {
+    @apply ml-5 mb-3 font-bold
+  }
+
+  .list-sounds {
+    @apply flex flex-col
+  }
+
+  .sound-preview {
+    @apply flex flex-col p-5 mt-7 ml-auto mr-auto w-3/6 h-auto rounded-3xl bg-white shadow-md items-start
+  }
+
+  .view-graph {
+    @apply flex flex-col p-5 mt-10 ml-auto mr-auto w-11/12 h-auto rounded-3xl bg-white shadow-md relative
+  }
+
+  /* Upload Sound*/
+
+  .cc0-create-sound {
+    @apply flex flex-col
+  }
+
+  .cc0-create-sound-form {
+    @apply mx-auto flex flex-col  border-black shadow-lg p-10 rounded
+  }
+
+  .cc0-file-upload {
+    @apply flex flex-row
+  }
+
+  .cc0-form-submit {
+    @apply flex flex-row m-4
+  }
+
+  .cc0-submit-button {
+    @apply bg-red-500 text-white font-medium px-8 py-2 rounded m-2 hover:bg-red-700
+  }
+
+  #category {
+    @apply min-w-min h-min self-center
+  }
+
+  #cc0-form-description {
+    @apply leading-loose
+  }
+
+  
+
+
+
+  .cc0-file-input {
+    @apply block w-full text-sm text-slate-500 self-center
+    file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded
+    file:text-sm file:font-semibold
+    file:bg-red-500 file:text-white
+    hover:file:bg-red-700 hover:file:cursor-pointer
+  }
+
+  .cc0-file-input-invalid {
+    @apply block w-full text-sm self-center
+    file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded
+    file:text-sm text-red-500 file:font-semibold
+    file:bg-red-500 file:text-white
+    hover:file:bg-red-700 hover:file:cursor-pointer
+  }
+
+
+  /* Display one sound effect */
+
+  .cc0-single-sound {
+    @apply relative
+  }
+
+  .cc0-sound-info {
+    @apply flex flex-row justify-between mb-10
+  }
+
+  .sound-descriptors {
+    @apply flex flex-col text-left
+  }
+
+  .cc0-ffmpeg-converter {
+    @apply flex flex-row w-max
+  }
+
+  .cc0-category-select {
+    @apply w-min 
+  }
+
+  .cc0-format-option {
+    @apply hover:bg-gray-100 p-2 rounded
+  }
+
+  .cc0-format-list {
+    @apply m-0 justify-center z-30
+  }
+
+  .cc0-list-playlist {
+    @apply m-0 justify-center z-10
+  }
+
+  .cc0-format-dropdown {
+    @apply self-center
+  }
+
+  .cc0-sound-metadata {
+    @apply flex flex-row justify-between mt-3
+  }
+
+  .cc0-sound-settings {
+    @apply flex flex-row w-full justify-between
+  }
+
+  /* Delete */
+  .cc0-delete-sound  {
+    @apply flex flex-col backdrop-blur-sm absolute top-0 left-0 w-full h-full z-10 bg-white bg-opacity-50
+  }
+
+  .cc0-delete-sound-form {
+    @apply mx-auto flex flex-col  border-black shadow-lg p-10 rounded-xl bg-white
+  }
+
+  /* Edit */
+
+  .cc0-edit-sound  {
+    @apply flex flex-col backdrop-blur-sm absolute top-0 left-0 w-full h-full z-10 bg-white bg-opacity-50
+  }
+
+  .cc0-edit-sound-form {
+    @apply mx-auto flex flex-col  border-black shadow-lg p-10 rounded-xl bg-white
+  }
+
+  #cc0-delete-button {
+    @apply bg-gray-300 text-black hover:bg-red-500 hover:text-white
+  }
+
+  /* Fail */
+  .cc0-fail {
+    @apply flex flex-col m-auto items-center
+  }
+
+
+
+  /* Playlists */
+  .cc0-list-playlists {
+    @apply flex flex-col w-3/5 m-auto
+  }
+
+  .cc0-list-preview {
+    @apply flex flex-row m-5 h-20 items-center bg-white hover:bg-gray-100 hover:cursor-pointer shadow-md rounded-lg 
+  }
+
+  .cc0-list-info-container {
+    @apply flex flex-row w-full h-full justify-between
+  }
+
+  .cc0-list-name {
+    @apply flex flex-row w-full items-center
+  }
+
+  .cc0-list-initial {
+    @apply flex w-24 h-full text-red-400 justify-center items-center font-black text-5xl bg-gray-100
+  }
+
+  .cc0-list-info {
+    @apply flex flex-col content-start ml-5 text-left
+  }
+
+  .cc0-list-title {
+    @apply font-semibold 
+  }
+
+  .cc0-list-options {
+    @apply flex flex-row m-10 justify-center items-center
+  }
+
+  .cc0-list-dropdown {
+    @apply self-center
+  }
+
+  .cc0-edit-playlist  {
+    @apply flex flex-col backdrop-blur-sm absolute top-0 left-0 w-full h-full z-10 bg-white bg-opacity-30
+  }
+
+  .cc0-edit-playlist-form {
+    @apply mx-auto flex flex-col  border-black shadow-lg p-10 m-auto rounded-xl bg-white
+  }
+
+  /*Delete Playlist */
+  .cc0-delete-playlist  {
+    @apply flex flex-col backdrop-blur-sm absolute top-0 left-0 w-full h-full z-10 bg-white bg-opacity-50
+  }
+
+  .cc0-delete-playlist-form {
+    @apply mx-auto flex flex-col m-auto border-black shadow-lg p-10 rounded-xl bg-white
+  }
+
+  /* Footer */
+  .cc0-footer {
+    @apply flex flex-row h-32 w-full bg-white drop-shadow-2xl justify-around items-center mt-10 p-10
+  }
+
+  .cc0-copyright {
+    @apply flex flex-row items-center
+  }
+
+  .cc0-legal-links {
+    @apply flex flex-col
+  }
+
+  /* Privacy Policy*/
+  .cc0-privacy-policy {
+    @apply p-5 max-w-3xl m-auto leading-7
+  }
+
+  /* Table */
+  .table {
+    @apply flex flex-col m-auto w-3/5 justify-center items-center
+  }
+}
+
+test {
+  padding: .1em;
+  margin: 3em auto 0 auto;
+  width: 50%;
+  border-radius: 23px;
+  background: #f8f8f8;
+  box-shadow:  17px 17px 34px #e7e7e7,
+               -17px -17px 34px #ffffff;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Navbar */
+.navbarbackup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1em;
+}
+
+
+#links a, #account-links a {
+  margin: 10px;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 7%;
+  margin: 2em auto 0;
+}
+
+.sound-preview a {
+  text-decoration: none;
+}
+
+/* 404 */
+
+.not-found h1 {
+  font-size: 5em;
+  margin-bottom: 0;
+}
+
+.cc0-link {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition-duration: 0.75s;
+  font-size: 0.875rem;
+}
+
+.cc0-link:hover {
+  background-color: #f3f4f6
+}
+
+.cc0-link.active {
+  text-decoration: underline;
+}
+
+.MuiYearCalendar-root {
+  box-shadow: 0 0 0 1px #e0e0e0;
+  min-width: 100%;
+}
+
+.year-picker {
+  @apply flex flex-col w-3/6 align-middle justify-center m-auto
+}
