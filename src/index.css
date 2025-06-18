@@ -493,6 +493,6 @@ code {
   min-width: 100%;
 }
 
-.year-picker {
+.date-picker {
   @apply flex flex-col w-3/6 align-middle justify-center m-auto
 }
