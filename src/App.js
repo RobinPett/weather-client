@@ -6,9 +6,7 @@ import NotFound from './components/info/NotFound.js'
 import { Toaster } from 'sonner'
 import Footer from './components/navigation/Footer.js'
 import ScrollToTop from './components/navigation/ScrollToTop.js'
-import Platforms from './components/navigation/Platforms.js'
-import Genres from './components/navigation/Genres.js'
-import RatingsVsGenre from './components/navigation/RatingsVsGenres.js';
+import Temperature from './components/navigation/Temperature.js';
 
 function App() {
   return (
@@ -18,9 +16,7 @@ function App() {
         <div className="content">
           <ScrollToTop>
             <Routes>
-              <Route path='/genres' element={<Genres />}></Route>
-              <Route path='/platforms' element={<Platforms />}></Route>
-              <Route path='/ratings-vs-genres' element={<RatingsVsGenre />}></Route>
+              <Route path='/measurements' element={<Temperature />}></Route>
               <Route path='/' element={<Home />}></Route>
               <Route path='*' element={<NotFound />}></Route>
             </Routes>
