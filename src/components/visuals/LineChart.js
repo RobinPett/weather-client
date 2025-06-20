@@ -21,7 +21,7 @@ const LineChart = ({ data }) => {
       const options = {
         title: {
           text: 'Temperature and Humidity Over Time',
-          left: 'center'
+          left: 'left'
         },
         tooltip: {
           trigger: 'axis'
@@ -31,7 +31,7 @@ const LineChart = ({ data }) => {
         },
         xAxis: {
           type: 'category',
-          data: data.map(item => new Date(item.createdAt).toLocaleString()), // Assuming data has a date field
+          data: data.map(item => new Date(item.createdAt).toLocaleDateString('sv-SE', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })), // Assuming data has a date field
         },
         yAxis: [
           {
@@ -51,24 +51,28 @@ const LineChart = ({ data }) => {
             }
           }
         ],
-        series: [{
-          name: 'Temperature',
-          type: 'line',
-          data: data.map(item => item.temperature), // Assuming data has a temperature field
-          smooth: true,
-          lineStyle: {
-            width: 2
+        series: [
+          {
+            name: 'Temperature',
+            type: 'line',
+            data: data.map(item => item.temperature), // Assuming data has a temperature field
+            smooth: true,
+            lineStyle: {
+              width: 2
+            },
+            yAxisIndex: 0 // Use the first yAxis for temperature
+          },
+          {
+            name: 'Humidity',
+            type: 'line',
+            data: data.map(item => item.humidity), // Assuming data has a humidity field
+            smooth: true,
+            lineStyle: {
+              width: 2
+            },
+            yAxisIndex: 1 // Use the second yAxis for humidity
           }
-        },
-        {
-          name: 'Humidity',
-          type: 'line',
-          data: data.map(item => item.humidity), // Assuming data has a humidity field
-          smooth: true,
-          lineStyle: {
-            width: 2
-          }
-        }]
+        ]
       }
       chart.setOption(options)
 
