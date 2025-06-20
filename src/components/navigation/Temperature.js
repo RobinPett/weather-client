@@ -12,6 +12,8 @@ import LineChart from '../visuals/LineChart.js'
  */
 const Temperature = () => {
   const [data, setData] = useState([])
+  const [smhiData, setSmhiData] = useState([])
+  const [mergeData, setMergeData] = useState([])
   const [loading, setLoading] = useState(false)
   const fetchService = new FetchService(process.env.REACT_APP_API_URL)
 
@@ -21,7 +23,10 @@ const Temperature = () => {
       const fromDate = from.toDate().toISOString().split('T')[0] // Format date to YYYY-MM-DD
       const toDate = to.toDate().toISOString().split('T')[0] // Format date to YYYY-MM-DD
       const newDate = { from: fromDate, to: toDate }
+      setLoading(true)
       await fetchData(newDate)
+      await fetchSMHIData()
+      setLoading(false)
     }
   }
 
@@ -30,16 +35,48 @@ const Temperature = () => {
    */
   const fetchData = async (date) => {
     try {
-      setLoading(true)
       const data = await fetchService.getTemperatureAndHumidity(date)
       setData(await data)
       console.log('Fetched data:', data)
-      setLoading(false)
     } catch (error) {
       console.error('Error fetching data:', error)
       toast.error('Error fetching data')
     }
   }
+
+  /**
+ * Fetches temp from smhi.
+ */
+  const fetchSMHIData = async () => {
+    try {
+      const smhiData = await fetchService.getSMHIData()
+      console.log('SMHI data:', smhiData)
+      const formattedData = smhiData.value.map(item => ({
+        temperature: parseFloat(item.value),
+        createdAt: new Date(item.date).toISOString(),
+        source: 'SMHI'
+      })) 
+      console.log('Formatted SMHI data:', formattedData)
+      setSmhiData(formattedData)
+      console.log('Fetched SMHI data:', data)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+      toast.error('Error fetching SMHI data')
+    }
+  }
+
+  useEffect(() => {
+      const mergeData = [
+    ...data.map(d => ({
+      createdAt: d.createdAt,
+      temperature: d.temperature,
+      humidity: d.humidity,
+      source: 'API'
+    })),
+    ...smhiData
+  ]
+      setMergeData(mergeData)
+  }, [data, smhiData])
 
   return (
     <div>
@@ -47,7 +84,7 @@ const Temperature = () => {
         <DatePicker updateDate={handleDateChange} />
       </div>
 
-      {data && data.length > 0 ? <LineChart data={data} /> : <p>No data available</p>}
+      {mergeData && mergeData.length > 0 ? <LineChart data={data} /> : <p>No data available</p>}
       {loading && <Loader blur={true} />}
     </div>
   )
