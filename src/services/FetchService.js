@@ -25,7 +25,7 @@ export class FetchService {
   }
 
   getTemperatureAndHumidity(date) {
-    const formattedDate = date.toISOString().split('T')[0] // Format date to YYYY-MM-DD
-    return this.fetchData(`/measurements?from=${formattedDate}`)
+    const {from, to} = date
+    return this.fetchData(`/measurements?from=${from}&to=${to}`)
   }
 }
