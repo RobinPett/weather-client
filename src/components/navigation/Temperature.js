@@ -50,7 +50,7 @@ const Temperature = () => {
   const fetchSMHIData = async (date) => {
     try {
       const smhiData = await fetchService.getSMHIData(date)
-      console.log('SMHI data:', smhiData)
+      console.log('Fetched SMHI data:', smhiData)
       const formattedData = smhiData.value.map(item => ({
         smhiTemperature: parseFloat(item.value),
         createdAt: new Date(item.date).toISOString(),
@@ -58,7 +58,6 @@ const Temperature = () => {
       }))
       console.log('Formatted SMHI data:', formattedData)
       setSmhiData(formattedData)
-      console.log('Fetched SMHI data:', data)
     } catch (error) {
       console.error('Error fetching data:', error)
       toast.error('Error fetching SMHI data')
