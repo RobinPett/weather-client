@@ -25,7 +25,7 @@ const Temperature = () => {
       const newDate = { from: fromDate, to: toDate }
       setLoading(true)
       await fetchData(newDate)
-      await fetchSMHIData()
+      await fetchSMHIData(newDate)
       setLoading(false)
     }
   }
@@ -36,8 +36,8 @@ const Temperature = () => {
   const fetchData = async (date) => {
     try {
       const data = await fetchService.getTemperatureAndHumidity(date)
-      setData(await data)
-      console.log('Fetched data:', data)
+      setData(data)
+      console.log('Fetched sensor data:', data)
     } catch (error) {
       console.error('Error fetching data:', error)
       toast.error('Error fetching data')
@@ -47,15 +47,15 @@ const Temperature = () => {
   /**
  * Fetches temp from smhi.
  */
-  const fetchSMHIData = async () => {
+  const fetchSMHIData = async (date) => {
     try {
-      const smhiData = await fetchService.getSMHIData()
+      const smhiData = await fetchService.getSMHIData(date)
       console.log('SMHI data:', smhiData)
       const formattedData = smhiData.value.map(item => ({
-        temperature: parseFloat(item.value),
+        smhiTemperature: parseFloat(item.value),
         createdAt: new Date(item.date).toISOString(),
         source: 'SMHI'
-      })) 
+      }))
       console.log('Formatted SMHI data:', formattedData)
       setSmhiData(formattedData)
       console.log('Fetched SMHI data:', data)
@@ -68,7 +68,7 @@ const Temperature = () => {
   useEffect(() => {
       const mergeData = [
     ...data.map(d => ({
-      createdAt: d.createdAt,
+      createdAt: new Date(d.createdAt).toISOString(),
       temperature: d.temperature,
       humidity: d.humidity,
       source: 'API'
@@ -84,7 +84,7 @@ const Temperature = () => {
         <DatePicker updateDate={handleDateChange} />
       </div>
 
-      {mergeData && mergeData.length > 0 ? <LineChart data={data} /> : <p>No data available</p>}
+      {mergeData && mergeData.length > 0 ? <LineChart data={mergeData} /> : <p>No data available</p>}
       {loading && <Loader blur={true} />}
     </div>
   )

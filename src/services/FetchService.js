@@ -5,10 +5,12 @@
 export class FetchService {
   #baseUrl
   #smhiUrl
+  #smhiArchiveUrl
 
   constructor(baseUrl) {
     this.#baseUrl = baseUrl
     this.#smhiUrl = 'https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/78400/period/latest-day/data.json'
+    this.#smhiArchiveUrl = 'https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/78400/period/latest-months/data.json'
   }
 
   /**
@@ -31,11 +33,25 @@ export class FetchService {
     return this.fetchData(`${this.#baseUrl}/measurements?from=${from}&to=${to}`)
   }
 
-  async getSMHIData() {
-    const response = await fetch(this.#smhiUrl)
-    if (!response.ok) {
-      throw new Error('Invalid SMHI data format')
+  async getSMHIData(date) {
+    let data
+    
+    if (date) {
+      console.log('Fetching SMHI data for date range:', date)
+      data = await this.fetchData(this.#smhiArchiveUrl)
+    } else {
+      console.log('Fetching latest SMHI data')
+      data = await this.fetchData(this.#smhiUrl)
     }
-    return await response.json()
+    
+    if (date && date.from && date.to) {
+      // Filter based on date range
+      const fromDate = new Date(date.from).getTime()
+      const toDate = new Date(date.to).getTime()
+      data.value = data.value.filter(item =>
+        item.date >= fromDate && item.date <= toDate
+      )
+    }
+    return data
   }
 }
