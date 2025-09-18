@@ -31,7 +31,7 @@ export class FetchService {
 
   getTemperatureAndHumidity(date) {
     const stockholmMidnight = new Date(new Date(date + 'T00:00:00').toLocaleString('en-US', { timeZone: this.#timeZone }));
-    const from = stockholmMidnight.toISOString();
+    const from = stockholmMidnight.getTime();
     console.log(`Fetching temperature and humidity data from: ${this.#baseUrl}/measurements?from=${from}`)
     return this.fetchData(`${this.#baseUrl}/measurements?from=${from}`)
   }
