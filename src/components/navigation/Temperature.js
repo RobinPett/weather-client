@@ -75,7 +75,11 @@ const Temperature = ({ fetchService }) => {
       humidity: d.humidity,
       source: 'API'
     })),
-    ...smhiData
+    ...smhiData.map(d => ({
+      createdAt: new Date(new Date(d.createdAt).toLocaleString('sv-SE', { timeZone })),
+      smhiTemperature: d.smhiTemperature,
+      source: 'SMHI'
+    }))
   ]
       setMergeData(mergeData)
   }, [data, smhiData])
