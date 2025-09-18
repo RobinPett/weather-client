@@ -1,8 +1,7 @@
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Loader from '../info/Loader.js'
 import SingleDatePicker from '../common/SingleDatePicker.js'
 import { toast } from 'sonner'
-import { FetchService } from '../../services/FetchService.js'
 import LineChart from '../visuals/LineChart.js'
 
 /**
@@ -10,12 +9,11 @@ import LineChart from '../visuals/LineChart.js'
  *
  * @returns {JSX.Element} - The Temperature component.
  */
-const Temperature = () => {
+const Temperature = ({ fetchService }) => {
   const [data, setData] = useState([])
   const [smhiData, setSmhiData] = useState([])
   const [mergeData, setMergeData] = useState([])
   const [loading, setLoading] = useState(false)
-  const fetchService = new FetchService(process.env.REACT_APP_API_URL)
   const timeZone = 'Europe/Stockholm';
 
 
@@ -32,7 +30,7 @@ const Temperature = () => {
   /**
    * Fetches temp and humidity by date.
    */
-  const fetchData = async (date) => {
+  const fetchData = useCallback(async (date) => {
     try {
       const data = await fetchService.getTemperatureAndHumidity(date)
       setData(data)
@@ -41,12 +39,12 @@ const Temperature = () => {
       console.error('Error fetching sensor data:', error)
       toast.error('Error fetching sensor data')
     }
-  }
+  }, [fetchService])
 
   /**
  * Fetches temp from smhi.
  */
-  const fetchSMHIData = async (date) => {
+  const fetchSMHIData = useCallback(async (date) => {
     try {
       const smhiData = await fetchService.getSMHIData(date)
       console.log('Fetched SMHI data:', smhiData)
@@ -61,13 +59,13 @@ const Temperature = () => {
       console.error('Error fetching data:', error)
       toast.error('Error fetching SMHI data')
     }
-  }
+  }, [fetchService])
 
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0]
     fetchData(currentDate)
     fetchSMHIData(currentDate)
-  }, [])
+  }, [fetchData, fetchSMHIData])
 
   useEffect(() => {
       const mergeData = [

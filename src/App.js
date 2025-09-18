@@ -7,6 +7,9 @@ import { Toaster } from 'sonner'
 import Footer from './components/navigation/Footer.js'
 import ScrollToTop from './components/navigation/ScrollToTop.js'
 import Temperature from './components/navigation/Temperature.js';
+import { FetchService } from './services/FetchService.js';
+
+  const fetchService = new FetchService(process.env.REACT_APP_API_URL)
 
 function App() {
   return (
@@ -16,7 +19,7 @@ function App() {
         <div className="content">
           <ScrollToTop>
             <Routes>
-              <Route path='/measurements' element={<Temperature />}></Route>
+              <Route path='/measurements' element={<Temperature fetchService={fetchService} />}></Route>
               <Route path='/' element={<Home />}></Route>
               <Route path='*' element={<NotFound />}></Route>
             </Routes>
