@@ -63,8 +63,13 @@ const Temperature = ({ fetchService }) => {
 
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0]
-    fetchData(currentDate)
-    fetchSMHIData(currentDate)
+    const fetchAllData = async () => {
+      setLoading(true)
+      await fetchData(currentDate)
+      await fetchSMHIData(currentDate)
+      setLoading(false)
+    }
+    fetchAllData()
   }, [fetchData, fetchSMHIData])
 
   useEffect(() => {
