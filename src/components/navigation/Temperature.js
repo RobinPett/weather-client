@@ -38,8 +38,8 @@ const Temperature = () => {
       setData(data)
       console.log('Fetched sensor data:', data)
     } catch (error) {
-      console.error('Error fetching data:', error)
-      toast.error('Error fetching data')
+      console.error('Error fetching sensor data:', error)
+      toast.error('Error fetching sensor data')
     }
   }
 

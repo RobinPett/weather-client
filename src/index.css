@@ -31,7 +31,7 @@
     @apply min-h-screen
   }
 
-  .cc0-button {
+  .button {
     @apply bg-red-500 text-white font-medium px-2 py-1 rounded m-2 hover:bg-red-700
   }
 
@@ -40,15 +40,15 @@
   }
 
   .cc0-list {
-    @apply block mb-2 text-sm font-medium text-gray-900 
+    @apply block mb-2 text-sm font-medium text-gray-900
   }
 
   .cc0-select {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
   }
 
   .cc0-select-invalid {
-    @apply bg-gray-50 border border-red-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+    @apply bg-gray-50 border border-red-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
   }
 
   .cc0-input-form {
@@ -56,33 +56,33 @@
   }
 
   .cc0-input-label {
-    @apply block mb-2 text-sm font-medium text-gray-900 
+    @apply block mb-2 text-sm font-medium text-gray-900
   }
 
   .cc0-input-text {
-    @apply m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+    @apply m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5
     /* disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
       focus:invalid:border-pink-500 focus:invalid:ring-pink-500 */
   }
 
- .cc0-input-invalid {
+  .cc0-input-invalid {
     @apply m-4 border bg-gray-50 border-red-500 text-sm rounded-lg block p-2.5
   }
 
   .cc0-input-email {
-    @apply m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+    @apply m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5
     /* disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
       focus:invalid:border-pink-500 focus:invalid:ring-pink-500 */
   }
 
   .cc0-input-email:valid {
-    @apply bg-green-100 border border-green-500 text-green-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+    @apply bg-green-100 border border-green-500 text-green-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5
   }
 
   .cc0-input-valid {
-    @apply m-4 bg-green-100 border border-green-500 text-green-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+    @apply m-4 bg-green-100 border border-green-500 text-green-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5
   }
 
   .cc0-signup {
@@ -106,11 +106,11 @@
   /* Home */
 
   .home {
-    @apply w-full h-full
+    @apply flex flex-row justify-around p-32 shadow-xl rounded-3xl bg-cover bg-opacity-0 overflow-hidden
   }
 
   .home-hero {
-    @apply justify-around w-5/6 h-2/4 m-auto p-32 shadow-xl rounded-3xl bg-cover bg-opacity-0 overflow-hidden
+    @apply flex flex-col items-center w-3/6 m-auto mb-10
   }
 
   .hero-text {
@@ -130,85 +130,21 @@
   }
 
 
-  /* Audio player */
-  .cc0-audio-player {
-    @apply w-full m-2
+  /*Range slider*/
+  input[type=range] {
+    @apply appearance-none bg-transparent
   }
 
-  .cc0-waveform {
-    @apply flex-grow
+  input[type=range]::-webkit-slider-runnable-track {
+    @apply bg-black/25 rounded-full;
   }
 
-
-  .cc0-audio-player-main {
-    @apply flex flex-col justify-between
+  input[type=range]::-moz-range-track {
+    @apply bg-black/25 rounded-full;
   }
 
-.cc0-play-button {
-  @apply p-3 rounded-full bg-gray-100 shadow-sm mr-4 hover:bg-gray-300
-}
-
-.cc0-volume-button {
-  @apply p-3 rounded-full bg-gray-100 shadow-sm hover:bg-gray-300
-}
-
-.cc0-audio-controls {
-  @apply flex flex-row mt-5 justify-between items-center
-}
-
-.cco-play-pause {
-  @apply flex flex-row items-center
-}
-
-.cc0-volume-slider {
-  @apply flex self-center origin-left items-center
-}
-
-#volume {
-  @apply self-center
-}
-
-.cc0-converter {
-  @apply self-center
-}
-
-/*Range slider*/
-input[type=range] {
-  @apply appearance-none bg-transparent
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-  @apply  bg-black/25 rounded-full;
-}
-
-input[type=range]::-moz-range-track {
-  @apply bg-black/25 rounded-full;
-}
-
-input[type=range]::-ms-track {
-  @apply bg-black/25 rounded-full;
-}
-
-  /* List of sounds*/
-
-  .cc0-pagination-button {
-    @apply bg-gray-500 text-white font-medium px-2 py-1 rounded m-2 hover:bg-red-500 h-full
-  }
-
-  .cc0-pagination-button-selected {
-    @apply bg-red-500 text-white font-medium px-2 py-1 rounded m-2 hover:bg-red-500 h-full
-  }
-
-  .cc0-sound-title {
-    @apply ml-5 mb-3 font-bold
-  }
-
-  .list-sounds {
-    @apply flex flex-col
-  }
-
-  .sound-preview {
-    @apply flex flex-col p-5 mt-7 ml-auto mr-auto w-3/6 h-auto rounded-3xl bg-white shadow-md items-start
+  input[type=range]::-ms-track {
+    @apply bg-black/25 rounded-full;
   }
 
   .view-graph {
@@ -222,7 +158,7 @@ input[type=range]::-ms-track {
   }
 
   .cc0-create-sound-form {
-    @apply mx-auto flex flex-col  border-black shadow-lg p-10 rounded
+    @apply mx-auto flex flex-col border-black shadow-lg p-10 rounded
   }
 
   .cc0-file-upload {
@@ -245,24 +181,16 @@ input[type=range]::-ms-track {
     @apply leading-loose
   }
 
-  
+
 
 
 
   .cc0-file-input {
-    @apply block w-full text-sm text-slate-500 self-center
-    file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded
-    file:text-sm file:font-semibold
-    file:bg-red-500 file:text-white
-    hover:file:bg-red-700 hover:file:cursor-pointer
+    @apply block w-full text-sm text-slate-500 self-center file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded file:text-sm file:font-semibold file:bg-red-500 file:text-white hover:file:bg-red-700 hover:file:cursor-pointer
   }
 
   .cc0-file-input-invalid {
-    @apply block w-full text-sm self-center
-    file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded
-    file:text-sm text-red-500 file:font-semibold
-    file:bg-red-500 file:text-white
-    hover:file:bg-red-700 hover:file:cursor-pointer
+    @apply block w-full text-sm self-center file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded file:text-sm text-red-500 file:font-semibold file:bg-red-500 file:text-white hover:file:bg-red-700 hover:file:cursor-pointer
   }
 
 
@@ -285,7 +213,7 @@ input[type=range]::-ms-track {
   }
 
   .cc0-category-select {
-    @apply w-min 
+    @apply w-min
   }
 
   .cc0-format-option {
@@ -313,22 +241,22 @@ input[type=range]::-ms-track {
   }
 
   /* Delete */
-  .cc0-delete-sound  {
+  .cc0-delete-sound {
     @apply flex flex-col backdrop-blur-sm absolute top-0 left-0 w-full h-full z-10 bg-white bg-opacity-50
   }
 
   .cc0-delete-sound-form {
-    @apply mx-auto flex flex-col  border-black shadow-lg p-10 rounded-xl bg-white
+    @apply mx-auto flex flex-col border-black shadow-lg p-10 rounded-xl bg-white
   }
 
   /* Edit */
 
-  .cc0-edit-sound  {
+  .cc0-edit-sound {
     @apply flex flex-col backdrop-blur-sm absolute top-0 left-0 w-full h-full z-10 bg-white bg-opacity-50
   }
 
   .cc0-edit-sound-form {
-    @apply mx-auto flex flex-col  border-black shadow-lg p-10 rounded-xl bg-white
+    @apply mx-auto flex flex-col border-black shadow-lg p-10 rounded-xl bg-white
   }
 
   #cc0-delete-button {
@@ -348,7 +276,7 @@ input[type=range]::-ms-track {
   }
 
   .cc0-list-preview {
-    @apply flex flex-row m-5 h-20 items-center bg-white hover:bg-gray-100 hover:cursor-pointer shadow-md rounded-lg 
+    @apply flex flex-row m-5 h-20 items-center bg-white hover:bg-gray-100 hover:cursor-pointer shadow-md rounded-lg
   }
 
   .cc0-list-info-container {
@@ -368,7 +296,7 @@ input[type=range]::-ms-track {
   }
 
   .cc0-list-title {
-    @apply font-semibold 
+    @apply font-semibold
   }
 
   .cc0-list-options {
@@ -379,16 +307,16 @@ input[type=range]::-ms-track {
     @apply self-center
   }
 
-  .cc0-edit-playlist  {
+  .cc0-edit-playlist {
     @apply flex flex-col backdrop-blur-sm absolute top-0 left-0 w-full h-full z-10 bg-white bg-opacity-30
   }
 
   .cc0-edit-playlist-form {
-    @apply mx-auto flex flex-col  border-black shadow-lg p-10 m-auto rounded-xl bg-white
+    @apply mx-auto flex flex-col border-black shadow-lg p-10 m-auto rounded-xl bg-white
   }
 
   /*Delete Playlist */
-  .cc0-delete-playlist  {
+  .cc0-delete-playlist {
     @apply flex flex-col backdrop-blur-sm absolute top-0 left-0 w-full h-full z-10 bg-white bg-opacity-50
   }
 
@@ -426,8 +354,8 @@ test {
   width: 50%;
   border-radius: 23px;
   background: #f8f8f8;
-  box-shadow:  17px 17px 34px #e7e7e7,
-               -17px -17px 34px #ffffff;
+  box-shadow: 17px 17px 34px #e7e7e7,
+    -17px -17px 34px #ffffff;
 }
 
 body {
@@ -450,7 +378,8 @@ code {
 }
 
 
-#links a, #account-links a {
+#links a,
+#account-links a {
   margin: 10px;
 }
 
@@ -494,5 +423,13 @@ code {
 }
 
 .date-picker {
-  @apply flex flex-col w-3/6 align-middle justify-center m-auto
+  @apply flex flex-col w-min align-middle justify-center m-auto
+}
+
+.home-image-container {
+  @apply flex justify-center
+}
+
+.home-image {
+  @apply w-80 h-auto rounded-3xl shadow-lg justify-center m-auto
 }

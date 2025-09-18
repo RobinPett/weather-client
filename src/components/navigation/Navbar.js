@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom'
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <NavLink to='/' className="text-center text-red-600 font-bold">Weather App</NavLink>
+      <NavLink to='/' className="text-center text-red-600 font-bold">Visby Weather</NavLink>
       <div className="links">
         <NavLink exact activeClassName='cc0-link-active' className='cc0-link' to='/measurements'>Measurements</NavLink>
       </div>
