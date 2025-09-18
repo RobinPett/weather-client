@@ -1,17 +1,17 @@
 import dayjs from 'dayjs'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker'
 import { useState } from 'react'
+import { DatePicker } from '@mui/x-date-pickers'
 
 /**
- * YearPicker component.
+ * SingleDatePicker component.
  *
- * @param {function} updateYear - Function to update the selected year. 
- * @returns {JSX.Element} - The DatePicker component.
+ * @param {function} updateDate - Function to update the selected date.
+ * @returns {JSX.Element} - The SingleDatePicker component.
  */
-export default function DatePicker({ updateDate }) {
-  const [value, setValue] = useState([dayjs(), dayjs()]) // Initialize value for DateRangePicker
+export default function SingleDatePicker({ updateDate }) {
+  const [value, setValue] = useState(dayjs()) // Set current date as default
 
   const handleChange = (value) => {
       setValue(value)
@@ -22,7 +22,7 @@ export default function DatePicker({ updateDate }) {
     <div className="date-picker" style={{ padding: '10px' }}>
       <h1 className='mb-3'>Pick a date</h1>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateRangePicker value={value} disableFuture onChange={handleChange} />
+        <DatePicker value={value} disableFuture onChange={handleChange} />
       </LocalizationProvider>
     </div>
   )

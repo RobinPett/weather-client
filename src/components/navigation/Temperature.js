@@ -1,14 +1,14 @@
 import { use, useEffect, useState } from 'react'
 import Loader from '../info/Loader.js'
-import DatePicker from '../common/DatePicker.js'
+import SingleDatePicker from '../common/SingleDatePicker.js'
 import { toast } from 'sonner'
 import { FetchService } from '../../services/FetchService.js'
 import LineChart from '../visuals/LineChart.js'
 
 /**
- * View genres component.
- * 
- * @returns {JSX.Element} - The Genres component.
+ * Fetch temperature and humidity data and display it in a chart.
+ *
+ * @returns {JSX.Element} - The Temperature component.
  */
 const Temperature = () => {
   const [data, setData] = useState([])
@@ -16,19 +16,18 @@ const Temperature = () => {
   const [mergeData, setMergeData] = useState([])
   const [loading, setLoading] = useState(false)
   const fetchService = new FetchService(process.env.REACT_APP_API_URL)
+  const timeZone = 'Europe/Stockholm';
+
 
   const handleDateChange = async (date) => {
-    const [from, to] = date
-    if (from && to) {
-      const fromDate = from.toDate().toISOString().split('T')[0] // Format date to YYYY-MM-DD
-      const toDate = to.toDate().toISOString().split('T')[0] // Format date to YYYY-MM-DD
-      const newDate = { from: fromDate, to: toDate }
+    console.log('Selected date:', date)
+    const dateObj = date.toDate().toISOString().split('T')[0]
+    console.log('Formatted date:', dateObj)
       setLoading(true)
-      await fetchData(newDate)
-      await fetchSMHIData(newDate)
+      await fetchData(dateObj)
+      await fetchSMHIData(dateObj)
       setLoading(false)
     }
-  }
 
   /**
    * Fetches temp and humidity by date.
@@ -51,7 +50,7 @@ const Temperature = () => {
     try {
       const smhiData = await fetchService.getSMHIData(date)
       console.log('Fetched SMHI data:', smhiData)
-      const formattedData = smhiData.value.map(item => ({
+      const formattedData = smhiData.map(item => ({
         smhiTemperature: parseFloat(item.value),
         createdAt: new Date(item.date).toISOString(),
         source: 'SMHI'
@@ -65,9 +64,15 @@ const Temperature = () => {
   }
 
   useEffect(() => {
+    const currentDate = new Date().toISOString().split('T')[0]
+    fetchData(currentDate)
+    fetchSMHIData(currentDate)
+  }, [])
+
+  useEffect(() => {
       const mergeData = [
     ...data.map(d => ({
-      createdAt: new Date(d.createdAt).toISOString(),
+      createdAt: new Date(new Date(d.createdAt).toLocaleString('sv-SE', { timeZone })),
       temperature: d.temperature,
       humidity: d.humidity,
       source: 'API'
@@ -80,7 +85,7 @@ const Temperature = () => {
   return (
     <div>
       <div style={{ padding: '10px' }}>
-        <DatePicker updateDate={handleDateChange} />
+        <SingleDatePicker updateDate={handleDateChange} />
       </div>
 
       {mergeData && mergeData.length > 0 ? <LineChart data={mergeData} /> : <p>No data available</p>}

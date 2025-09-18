@@ -6,6 +6,7 @@ export class FetchService {
   #baseUrl
   #smhiUrl
   #smhiArchiveUrl
+  #timeZone = 'Europe/Stockholm'
 
   constructor(baseUrl) {
     this.#baseUrl = baseUrl
@@ -29,55 +30,29 @@ export class FetchService {
   }
 
   getTemperatureAndHumidity(date) {
-    const { from, to } = date
-    return this.fetchData(`${this.#baseUrl}/measurements?from=${from}&to=${to}`)
+    const stockholmMidnight = new Date(new Date(date + 'T00:00:00').toLocaleString('en-US', { timeZone: this.#timeZone }));
+    const from = stockholmMidnight.toISOString();
+    console.log(`Fetching temperature and humidity data from: ${this.#baseUrl}/measurements?from=${from}`)
+    return this.fetchData(`${this.#baseUrl}/measurements?from=${from}`)
   }
 
   async getSMHIData(date) {
     let data
-    let archivedData
-
-    console.log('Date from: ', date.from, 'Date to: ', date.to)
-
     const currentDate = new Date().toISOString().split('T')[0]
+    const startOfDay = new Date(new Date(date + 'T00:00:00').toLocaleString('en-US', { timeZone: this.#timeZone })).getTime();
+    const endOfDay = new Date(new Date(date + 'T23:59:59').toLocaleString('en-US', { timeZone: this.#timeZone })).getTime();
 
-    console.log('Current date:', currentDate)
-    console.log('Requested date:', date)
-
-    if (date.from === currentDate || date.to === currentDate) {
-      console.log('Fetching LATEST SMHI data')
+    if (date && date === currentDate) {
       data = await this.fetchData(this.#smhiUrl)
+    } else if (date) {
+      data = await this.fetchData(this.#smhiArchiveUrl)
     }
 
-    console.log('Fetching ARCHIVED SMHI data')
-    archivedData = await this.fetchData(this.#smhiArchiveUrl)
-
-    console.log('SMHI data:', data)
-    console.log('SMHI archived data:', archivedData)
-
-    const combinedSmhiData = {}
-
-    if (data && archivedData) {
-      // Check if both data exist with value arrays
-      if (Array.isArray(data.value) && Array.isArray(archivedData.value)) {
-        console.log('Combining SMHI data and archived data')
-        combinedSmhiData.value = [...data.value, ...archivedData.value]
-      } else { console.log('One of the SMHI data sets does not have a value array') }
-    }
-
-    console.log('Combined SMHI data:', combinedSmhiData)
-
-    // Filter based on date range and entire days
-    const fromDate = new Date(date.from + 'T00:00:00Z').getTime()
-    const toDate = new Date(date.to + 'T23:59:59Z').getTime()
-
-    console.log('Filtering SMHI data from:', fromDate, 'to:', toDate)
-
-    combinedSmhiData.value = combinedSmhiData.value.filter(item =>
-      item.date >= fromDate && item.date <= toDate
+    // Filter archived data to match the requested date
+    data = data.value.filter(item =>
+      item.date >= startOfDay && item.date <= endOfDay
     )
 
-
-    return combinedSmhiData
+    return data
   }
 }
